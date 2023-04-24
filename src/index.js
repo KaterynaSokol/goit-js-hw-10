@@ -39,4 +39,32 @@ function onInput(event) {
   }
 }
 
+function createList(item) {
+  return `<li class = 'item'>
+ <img class='item-img' src='${item.flags.svg}' alt = "flag of ${item.flags.alt}">
+ <p class = 'item-descr'>${item.name.official}</p>
+</li>`;
+}
 
+function generateCountry(array) {
+  return array.reduce((acc, item) => acc + createList(item), '');
+}
+
+function insertContent(array) {
+  const result = generateCountry(array);
+  return (countryList.innerHTML = result);
+}
+
+function createCountryCard(item) {
+  const languagesList = Object.values(item.languages);
+  return (countryInfo.innerHTML = ` <div class ='country-card'> <img class='card-img' src='${item.flags.svg}' alt = "flag of ${item.flags.alt} width = '50px'">
+ <h2 class = 'card-name'>${item.name.official}</h2>
+ </div>
+ <p class = 'card-descr'><span class = 'card-subtitle'>Capital:</span>${item.capital}</p>
+ <p class = 'card-descr'><span class = 'card-subtitle'>Population:</span>${item.population}</p>
+ <p class = 'card-descr'><span class = 'card-subtitle'>Languages:</span>${languagesList}
+ </p>`);
+}
+function clearHtml(element) {
+  return (element.innerHTML = '');
+}
